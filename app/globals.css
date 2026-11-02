@@ -48,13 +48,13 @@
 }
 
 :root {
-    --background: oklch(1 0 0);
-    --foreground: oklch(0.145 0 0);
+    --background: oklch(0.988 0.004 180);
+    --foreground: oklch(0.27 0.03 185);
     --card: oklch(1 0 0);
-    --card-foreground: oklch(0.145 0 0);
+    --card-foreground: oklch(0.27 0.03 185);
     --popover: oklch(1 0 0);
-    --popover-foreground: oklch(0.145 0 0);
-    --primary: oklch(0.205 0 0);
+    --popover-foreground: oklch(0.27 0.03 185);
+    --primary: oklch(0.44 0.08 180);
     --primary-foreground: oklch(0.985 0 0);
     --secondary: oklch(0.97 0 0);
     --secondary-foreground: oklch(0.205 0 0);
@@ -83,14 +83,14 @@
 }
 
 .dark {
-    --background: oklch(0.145 0 0);
-    --foreground: oklch(0.985 0 0);
-    --card: oklch(0.205 0 0);
-    --card-foreground: oklch(0.985 0 0);
-    --popover: oklch(0.205 0 0);
-    --popover-foreground: oklch(0.985 0 0);
-    --primary: oklch(0.922 0 0);
-    --primary-foreground: oklch(0.205 0 0);
+    --background: oklch(0.22 0.012 185);
+    --foreground: oklch(0.96 0.005 180);
+    --card: oklch(0.26 0.014 185);
+    --card-foreground: oklch(0.96 0.005 180);
+    --popover: oklch(0.26 0.014 185);
+    --popover-foreground: oklch(0.96 0.005 180);
+    --primary: oklch(0.8 0.08 180);
+    --primary-foreground: oklch(0.22 0.012 185);
     --secondary: oklch(0.269 0 0);
     --secondary-foreground: oklch(0.985 0 0);
     --muted: oklch(0.269 0 0);
@@ -129,4 +129,89 @@
   html {
     @apply font-sans;
     }
+  .maplibregl-popup-content {
+    @apply bg-transparent! shadow-none! p-0! rounded-none!;
+    }
+  .maplibregl-popup-tip {
+    @apply hidden!;
+    }
+  .maplibregl-ctrl-attrib {
+    @apply bg-background! text-muted-foreground! border-border! rounded-md! border! shadow-sm!;
+    }
+  .maplibregl-ctrl-attrib a {
+    @apply text-muted-foreground!;
+    }
+  .maplibregl-ctrl-attrib a:hover {
+    @apply text-foreground!;
+    }
+  .maplibregl-ctrl-attrib-button {
+    @apply bg-transparent! dark:invert;
+    }
+}
+
+/* Labels and hatching shared by the mapcn and Leaflet engines */
+.maplibregl-marker:has(.map-label-wrap),
+.map-label-wrap {
+  pointer-events: none;
+}
+
+.map-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.1;
+  text-align: center;
+  width: min-content;
+  color: var(--foreground);
+  text-shadow:
+    0 0 3px var(--background),
+    0 0 3px var(--background),
+    0 0 2px var(--background);
+}
+
+.map-label[data-kind="selected"] {
+  font-weight: 800;
+}
+
+.map-label[data-kind="context"] {
+  font-style: italic;
+  font-weight: 400;
+  width: max-content;
+  color: var(--muted-foreground);
+}
+
+.map-label-leaflet {
+  background: none;
+  border: 0;
+}
+
+.map-label-leaflet .map-label {
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+
+.map-pin-leaflet {
+  background: none;
+  border: 0;
+}
+
+.somalia-leaflet.leaflet-container {
+  background: transparent;
+  font: inherit;
+}
+
+.hatch-swatch {
+  background-image: repeating-linear-gradient(
+    135deg,
+    color-mix(in oklab, var(--foreground) 60%, transparent) 0 1px,
+    transparent 1px 3.5px
+  );
+}
+
+.somalia-tiles {
+  filter: saturate(0.35) opacity(0.85);
+}
+
+.dark .somalia-tiles {
+  filter: invert(1) hue-rotate(180deg) saturate(0.35) brightness(0.85);
 }
